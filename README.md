@@ -13,9 +13,8 @@ Projeto simples de gerenciamento de um sistema de vendas construído com Vue.js.
 
 Para começar a usar este projeto, siga as instruções abaixo:
 
-   
-1. Navegue até o diretório do projeto:
-   cd vue-project
+1. Certifique-se de usar a versão do node v20.16.0
 
 2. Instale as dependências do projeto:
-   npm install
+npm install
+3. Rode o projeto: npm run dev
