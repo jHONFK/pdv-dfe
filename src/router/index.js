@@ -10,12 +10,18 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', name: 'login', component: Login },
-    { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-    { path: '/vendas', name: 'Vendas', component: Vendas },
-    { path: '/produtos', name: 'Produtos', component: Produtos },
-    { path: '/clientes', name: 'Clientes', component: Clientes },
-    { path: '/relatorios', name: 'Relatorios', component: Relatorios }
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      children: [
+        { path: 'vendas', name: 'Vendas', component: Vendas },
+        { path: 'produtos', name: 'Produtos', component: Produtos },
+        { path: 'clientes', name: 'Clientes', component: Clientes },
+        { path: 'relatorios', name: 'Relatorios', component: Relatorios }
+      ]
+    },
   ]
-})
+});
 
 export default router
