@@ -1,16 +1,27 @@
 <template>
 	<div class="login-container">
 		<h1>Login</h1>
-		<form @submit.prevent="login">
-			<input type="text" v-model="username" placeholder="Usuário" />
-			<input type="password" v-model="password" placeholder="Senha" />
-			<button type="submit">Entrar</button>
-		</form>
+			<div class="form">
+				<InputText v-model="username" placeholder="Usuário" />
+				<InputText type="password" v-model="password" placeholder="Senha" />
+				<Button @click="login" label="Entrar" icon="pi pi-sign-in" class="p-button-success" />
+			</div>
+
+
 	</div>
 </template>
 
 <script>
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
+import 'primeicons/primeicons.css'
+
+
 export default {
+	components: {
+		InputText,
+		Button,
+	},
 	data() {
 		return {
 			username: '',
@@ -19,6 +30,7 @@ export default {
 	},
 	methods: {
 		login() {
+			console.log(this.username, this.password);
 			if (this.username === 'admin' && this.password === 'admin') {
 				this.$router.push('/dashboard');
 			} else {
@@ -36,5 +48,11 @@ export default {
 	padding: 20px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
+}
+
+div .form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 </style>

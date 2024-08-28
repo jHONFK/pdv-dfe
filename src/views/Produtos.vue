@@ -3,36 +3,51 @@
 		<h1>Gerenciamento de Produtos</h1>
 
 		<form @submit.prevent="saveProduto">
-			<input
-				type="text"
+			<InputText
 				v-model="produto.nome"
 				placeholder="Nome do Produto"
 				required
 			/>
-			<input
-				type="number"
+			<InputNumber
 				v-model.number="produto.preco"
 				placeholder="Preço"
 				required
-				step="0.01"
+				mode="currency"
+				currency="BRL"
+				locale="pt-BR"
 			/>
-			<button type="submit">
-				{{ editando ? 'Atualizar' : 'Adicionar' }} Produto
-			</button>
+			<Button
+				type="submit"
+				label="Salvar Produto"
+				:icon="editando ? 'pi pi-pencil' : 'pi pi-plus'"
+				class="p-button-success"
+			/>
 		</form>
 
 		<ul>
 			<li v-for="produto in produtos" :key="produto.id">
 				{{ produto.nome }} - R$ {{ produto.preco.toFixed(2) }}
-				<button @click="editProduto(produto)">Editar</button>
-				<button @click="deleteProduto(produto.id)">Deletar</button>
+				<Button @click="editProduto(produto)" icon="pi pi-pencil" class="p-button-warning" />
+				<Button @click="deleteProduto(produto.id)" icon="pi pi-trash" class="p-button-danger" />
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
+import Button from 'primevue/button';
+import 'primeicons/primeicons.css'
+
+
 export default {
+	components: {
+		InputText,
+		InputNumber,
+		Button,
+	},
 	data() {
 		return {
 			produtos: [],
@@ -94,17 +109,8 @@ export default {
 
 form {
 	margin-bottom: 20px;
-}
-
-input {
-	margin-right: 10px;
-	padding: 5px;
-}
-
-button {
-	margin-left: 5px;
-	padding: 5px 10px;
-	cursor: pointer;
+	display: flex;
+	gap: 10px;
 }
 
 ul {
@@ -113,6 +119,9 @@ ul {
 }
 
 li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 	margin-bottom: 10px;
 }
 </style>

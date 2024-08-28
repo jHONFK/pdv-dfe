@@ -15,13 +15,18 @@
 			</div>
 		</div>
 		<div v-else>
-			<p>Nenhuma venda registrada.</p>
+			<Message severity="info" text="Nenhuma venda registrada." />
 		</div>
 	</div>
 </template>
 
 <script>
+import Message from 'primevue/message';
+
 export default {
+	components: {
+		Message,
+	},
 	data() {
 		return {
 			vendas: [],

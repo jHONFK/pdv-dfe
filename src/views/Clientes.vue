@@ -3,26 +3,37 @@
 		<h1>Clientes</h1>
 
 		<div class="form-container">
-			<input v-model="form.nome" type="text" placeholder="Nome do Cliente" />
-			<input v-model="form.email" type="email" placeholder="Email do Cliente" />
-			<button @click="isEditing ? updateCliente() : addCliente()">
-				{{ isEditing ? 'Atualizar Cliente' : 'Adicionar Cliente' }}
-			</button>
+			<InputText v-model="form.nome" placeholder="Nome do Cliente" />
+			<InputText v-model="form.email" type="email" placeholder="Email do Cliente" />
+			<Button
+				@click="isEditing ? updateCliente() : addCliente()"
+				:label="isEditing ? 'Atualizar Cliente' : 'Adicionar Cliente'"
+				:icon="isEditing ? 'pi pi-pencil' : 'pi pi-plus'"
+				class="p-button-success"
+			/>
 		</div>
 
 		<ul>
 			<li v-for="(cliente, index) in clientes" :key="index">
 				{{ cliente.nome }} - {{ cliente.email }}
-				<button @click="editCliente(index)">Editar</button>
-				<button @click="deleteCliente(index)">Excluir</button>
+				<Button @click="editCliente(index)" icon="pi pi-pencil" />
+				<Button @click="deleteCliente(index)" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" />
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
+import 'primeicons/primeicons.css'
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
+
 export default {
 	name: 'Clientes',
+	components: {
+		InputText,
+		Button,
+	},
 	data() {
 		return {
 			clientes: [],
@@ -91,16 +102,8 @@ export default {
 
 .form-container {
 	margin-bottom: 20px;
-}
-
-.form-container input {
-	margin-right: 10px;
-	padding: 5px;
-}
-
-.form-container button {
-	padding: 5px 10px;
-	cursor: pointer;
+	display: flex;
+	gap: 10px;
 }
 
 ul {
@@ -109,12 +112,9 @@ ul {
 }
 
 li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 	margin-bottom: 10px;
-}
-
-button {
-	margin-left: 10px;
-	padding: 5px 10px;
-	cursor: pointer;
 }
 </style>
